@@ -28,6 +28,9 @@ const removeContact = async (req, res) => {
   });
 };
 const updateContact = async (req, res) => {
+  if (!req.body || Object.keys(req.body).length === 0) {
+    throw HttpError(400, "missing fields");
+  }
   const { id } = req.params;
   const result = await contacts.updateContact(id, req.body);
   if (!result) {
