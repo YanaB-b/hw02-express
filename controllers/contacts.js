@@ -31,13 +31,7 @@ const updateContact = async (req, res) => {
   if (!req.body || Object.keys(req.body).length === 0) {
     throw HttpError(400, "missing fields");
   }
-  const { error } = schemas.addSchema.validate(req.body);
-  if (error) {
-    throw HttpError(
-      400,
-      `missing required ${error.details[0].context.label} field`
-    );
-  }
+
   const { id } = req.params;
   const result = await contacts.updateContact(id, req.body);
   if (!result) {
